@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editText_dni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="dni"/>
+    <EditText
+        android:id="@+id/editText_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="nombre"/>
+    <EditText
+        android:id="@+id/editText_apellidos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="apellidos"/>
+    <LinearLayout
+        android:id="@+id/contentButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <ImageButton
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_add"/>
+        <ImageButton
+            android:id="@+id/mostrarElementos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_visibility_black_24dp"/>
+        <ImageButton
+            android:id="@+id/anteriorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chevron_left_black_24dp"/>
+        <EditText
+            android:id="@+id/editText_dniBuscar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="DNI buscar"/>
+        <ImageButton
+            android:id="@+id/siguienteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chevron_right_black_24dp"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
