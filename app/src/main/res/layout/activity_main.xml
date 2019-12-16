@@ -57,4 +57,19 @@
 
     </LinearLayout>
 
+    <ListView
+        android:id="@+id/listaDatosListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/recorrerBDButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RECORRER BASES DE DATOS"
+        android:background="#9E9D9D"
+        android:layout_gravity="center">
+
+    </Button>
+
 </LinearLayout>
