@@ -2,12 +2,15 @@ package com.example.ejemplorecorrerbd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     SQLiteDatabase sqLiteDatabase;
     //Controles de la apliacion
-    ImageButton insertarRegristro_Button;
+    ImageButton insertarRegristro_Button,mostrarListView_ImageButton;
 
 
 
@@ -40,10 +43,7 @@ public class MainActivity extends AppCompatActivity {
         for (Clientes cliente : datosClientes) {
             bdAdapter.insertarUnDato(cliente,sqLiteDatabase);
         }
-        Cursor cursor = bdAdapter.consultarDatos();
 
-        datosClientesConsulltados = bdAdapter.getClientes(cursor);
-        listaDatos.setAdapter(new AdaptadorClientes(this,R.layout.simple_item_listview,datosClientesConsulltados));
 
         //logica de botones
 
@@ -51,18 +51,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                TextView textViewDni = findViewById(R.id.dni_TextView);
-                TextView textViewNombre = findViewById(R.id.nombre_TextView);
-                TextView textViewApellido = findViewById(R.id.apellido_TextView);
-                if (textViewDni.getText()!=null && textViewNombre.getText()!=null && textViewApellido.getText()!=null){
+                EditText editTextDni = findViewById(R.id.editText_dni);
+                EditText editTextNombre = findViewById(R.id.editText_nombre);
+                EditText editTextApellido = findViewById(R.id.editText_apellidos);
+                if (editTextDni.getText()!=null && editTextNombre.getText()!=null && editTextApellido.getText()!=null){
                     Clientes cliente = new Clientes();
-                    cliente.setDni(textViewDni.getText().toString());
-                    cliente.setNombre(textViewNombre.getText().toString());
-                    cliente.setApellidos(textViewApellido.getText().toString());
+                    cliente.setDni(editTextDni.getText().toString());
+                    cliente.setNombre(editTextNombre.getText().toString());
+                    cliente.setApellidos(editTextApellido.getText().toString());
 
                     bdAdapter.insertarUnDato(cliente,sqLiteDatabase);
 
                 }
+            }
+        });
+
+        mostrarListView_ImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cursor cursor = bdAdapter.consultarDatos();
+
+                datosClientesConsulltados = bdAdapter.getClientes(cursor);
+                //listaDatos.setAdapter(new AdaptadorClientes(getApplicationContext(),R.layout.simple_item_listview,datosClientesConsulltados));
             }
         });
 
