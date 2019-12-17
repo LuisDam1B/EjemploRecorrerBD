@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class BDAdapter {
 
-    SQLiteDatabase sqLiteDatabase;
+
     BDClientes bdClientes;
     Context context;
 
@@ -33,9 +33,9 @@ public class BDAdapter {
         sqLiteDatabase.close();
     }
 
-    public void InsertarUnDato(Clientes cliente){
+    public void insertarUnDato(Clientes cliente,SQLiteDatabase sqLiteDatabase){
 
-        SQLiteDatabase sqLiteDatabase = bdClientes.getWritableDatabase();
+        sqLiteDatabase = bdClientes.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("dni",cliente.getDni());
@@ -49,7 +49,7 @@ public class BDAdapter {
 
     public Cursor consultarDatos()
     {
-        sqLiteDatabase = bdClientes.getReadableDatabase();
+        SQLiteDatabase  sqLiteDatabase = bdClientes.getReadableDatabase();
         if(sqLiteDatabase!=null) {
 
             return sqLiteDatabase.rawQuery("select  dni, nombre, apellidos from Clientes", null);
@@ -62,7 +62,7 @@ public class BDAdapter {
         bdClientes.close();
     }
 
-    public static ArrayList<Clientes> getClientes(Cursor cursor){
+    public ArrayList<Clientes> getClientes(Cursor cursor){
 
         ArrayList<Clientes> clientes;
         Clientes cliente;
@@ -71,7 +71,7 @@ public class BDAdapter {
         if ( !cursor.isAfterLast()){
             clientes = new ArrayList<Clientes>();
             while (!cursor.isAfterLast()){
-                cliente = new Clientes(cursor.getString(0),cursor.getString(1),cursor.getString(3));
+                cliente = new Clientes(cursor.getString(0),cursor.getString(1),cursor.getString(2));
                 clientes.add(cliente);
                 cursor.moveToNext();
             }
