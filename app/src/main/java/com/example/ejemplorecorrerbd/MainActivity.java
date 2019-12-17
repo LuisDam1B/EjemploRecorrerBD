@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -17,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Clientes> datosClientesConsulltados = new ArrayList<>();
 
     SQLiteDatabase sqLiteDatabase;
+    //Controles de la apliacion
+    ImageButton insertarRegristro_Button;
 
 
 
@@ -28,17 +34,39 @@ public class MainActivity extends AppCompatActivity {
         relleñarDatosClientes();
 
         listaDatos = findViewById(R.id.listaDatosListView);
+        insertarRegristro_Button = findViewById(R.id.addButton);
 
-        BDAdapter bdAdapter = new BDAdapter(this,"BD1",1);
+        final BDAdapter bdAdapter = new BDAdapter(this,"BD1",1);
         for (Clientes cliente : datosClientes) {
             bdAdapter.insertarUnDato(cliente,sqLiteDatabase);
         }
         Cursor cursor = bdAdapter.consultarDatos();
 
         datosClientesConsulltados = bdAdapter.getClientes(cursor);
-
-
         listaDatos.setAdapter(new AdaptadorClientes(this,R.layout.simple_item_listview,datosClientesConsulltados));
+
+        //logica de botones
+
+        insertarRegristro_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                TextView textViewDni = findViewById(R.id.dni_TextView);
+                TextView textViewNombre = findViewById(R.id.nombre_TextView);
+                TextView textViewApellido = findViewById(R.id.apellido_TextView);
+                if (textViewDni.getText()!=null && textViewNombre.getText()!=null && textViewApellido.getText()!=null){
+                    Clientes cliente = new Clientes();
+                    cliente.setDni(textViewDni.getText().toString());
+                    cliente.setNombre(textViewNombre.getText().toString());
+                    cliente.setApellidos(textViewApellido.getText().toString());
+
+                    bdAdapter.insertarUnDato(cliente,sqLiteDatabase);
+
+                }
+            }
+        });
+
+        bdAdapter.cerrarBD();
     }
 
     public void relleñarDatosClientes(){
