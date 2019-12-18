@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         listaDatos = findViewById(R.id.listaDatosListView);
         insertarRegristro_Button = findViewById(R.id.addButton);
+        mostrarListView_ImageButton = findViewById(R.id.mostrarElementos);
 
         final BDAdapter bdAdapter = new BDAdapter(this,"BD1",1);
         for (Clientes cliente : datosClientes) {
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 Cursor cursor = bdAdapter.consultarDatos();
 
                 datosClientesConsulltados = bdAdapter.getClientes(cursor);
-                //listaDatos.setAdapter(new AdaptadorClientes(getApplicationContext(),R.layout.simple_item_listview,datosClientesConsulltados));
+                listaDatos.setAdapter(new AdaptadorClientes(MainActivity.this,R.layout.simple_item_listview,datosClientesConsulltados));
             }
         });
 
